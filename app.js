@@ -66,6 +66,18 @@ app.put('/api/v1/patients', async(req,res)=>{
     }
 })
 
+// validatePateintData
+app.get('/api/v1/patients/validate',async(req,res)=>{
+    const patientID = request.body
+    try{
+        const patientToBeEdited = await hospitalModel.findOne({patientID:patientID})
+        res.status(200).json(patientToBeEdited)
+    }
+    catch(error)
+    {
+        res.status(500).json({message:error.message})
+    }
+})
 
 // listen
 app.listen(3600,()=>{
